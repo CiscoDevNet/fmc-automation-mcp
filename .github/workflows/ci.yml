@@ -1,0 +1,234 @@
+# SPDX-License-Identifier: Apache-2.0
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r python/requirements.txt
+          pip install -r requirements-dev.txt
+          pip install -r mcp_servers/rest-api-mcp/requirements.txt
+          pip install -r mcp_servers/terraform-mcp/requirements.txt
+
+      - name: Lint (ruff)
+        run: ruff check --output-format=github .
+
+      - name: Format check (ruff)
+        run: ruff format --check .
+
+      - name: Type check (mypy)
+        run: mypy python mcp_servers
+
+      - name: Unit tests
+        run: pytest --cov --cov-report=term-missing --cov-report=xml
+
+      - name: Upload coverage
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: coverage.xml
+          retention-days: 7
+
+  security:
+    name: Security scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install security tooling
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Static analysis (bandit)
+        run: bandit -c pyproject.toml -r python mcp_servers
+
+      - name: Dependency audit (pip-audit)
+        run: |
+          pip-audit -r python/requirements.txt --strict
+          for req in mcp_servers/*/requirements.txt; do
+            echo "::group::$req"
+            pip-audit -r "$req" --strict
+            echo "::endgroup::"
+          done
+
+  secrets:
+    name: Secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_UPLOAD_ARTIFACT: "false"
+
+  ansible:
+    name: Ansible lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install ansible-lint
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Install collections
+        run: ansible-galaxy collection install -r ansible/requirements.yml
+
+      - name: Lint playbooks
+        run: ansible-lint ansible/
+
+  terraform:
+    name: Terraform validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: "1.15.8"
+
+      - name: Format check
+        working-directory: terraform
+        run: terraform fmt -check -recursive
+
+      - name: Init (no backend)
+        working-directory: terraform
+        run: terraform init -backend=false
+
+      - name: Validate
+        working-directory: terraform
+        run: terraform validate
+
+  containers:
+    name: Container smoke test (${{ matrix.server }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - server: rest-api-mcp
+            port: 8000
+          - server: ansible-mcp
+            port: 8001
+          - server: terraform-mcp
+            port: 8002
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Build and start the stack
+        working-directory: mcp_servers/${{ matrix.server }}
+        run: |
+          cp .env.example .env
+          docker compose up -d --build
+
+      # No credentials are supplied, so this proves the server boots and serves MCP over
+      # HTTP. It does not exercise any FMC call.
+      - name: MCP endpoint answers
+        working-directory: mcp_servers/${{ matrix.server }}
+        env:
+          PORT: ${{ matrix.port }}
+        run: |
+          body='{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-06-18","capabilities":{},"clientInfo":{"name":"ci","version":"1"}}}'
+          for _ in $(seq 1 40); do
+            code=$(curl -sS -o /tmp/mcp-response -w '%{http_code}' -X POST \
+              -H 'Content-Type: application/json' \
+              -H 'Accept: application/json, text/event-stream' \
+              -d "$body" "http://127.0.0.1:${PORT}/mcp" 2>/dev/null || echo 000)
+            case "$code" in
+              000)
+                sleep 2
+                ;;
+              5*)
+                echo "::error::MCP endpoint returned HTTP $code"
+                head -c 2000 /tmp/mcp-response || true
+                docker compose logs
+                exit 1
+                ;;
+              *)
+                echo "MCP endpoint answered with HTTP $code"
+                head -c 500 /tmp/mcp-response || true
+                exit 0
+                ;;
+            esac
+          done
+          echo "::error::MCP endpoint never answered on port ${PORT}"
+          docker compose logs
+          exit 1
+
+      - name: Stop the stack
+        if: always()
+        working-directory: mcp_servers/${{ matrix.server }}
+        run: docker compose down -v
+
+  docs:
+    name: Link and policy check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Required governance files present
+        run: |
+          missing=0
+          for f in LICENSE NOTICE README.md SECURITY.md SUPPORT.md \
+                   CONTRIBUTING.md CODE_OF_CONDUCT.md CHANGELOG.md; do
+            if [ ! -f "$f" ]; then echo "::error::missing $f"; missing=1; fi
+          done
+          exit $missing
+
+      - name: No committed secrets files
+        run: |
+          found=$(git ls-files \
+            | grep -E '(^|/)\.env$|\.tfvars$|\.tfstate$|vault_pass|id_rsa|\.pem$' \
+            || true)
+          if [ -n "$found" ]; then
+            echo "::error::secret-bearing files are tracked:"
+            echo "$found"
+            exit 1
+          fi

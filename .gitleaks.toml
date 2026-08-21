@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: Apache-2.0
+# gitleaks configuration for fmc-automation-mcp
+title = "fmc-automation-mcp gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = """
+Documentation placeholders. These are template values shipped so users know which
+variables to set; they are not real credentials. Any change to these lines should
+still be reviewed.
+"""
+paths = [
+  '''.*\.env\.example$''',
+  '''.*\.example$''',
+  '''README\.md''',
+  '''mcp_servers/.*\.(md|html)$''',
+  '''ansible/group_vars/all\.yml''',
+  '''terraform/terraform\.tfvars\.example''',
+]
+regexTarget = "line"
+regexes = [
+  '''(?i)(password|passwd|secret|token)\s*[:=]\s*["']?(changeme|change_me|replace-me|<[^>]+>|\$\{[^}]+\}|example|placeholder|redacted|\*+)["']?''',
+  '''(?i)FMC_PASSWORD\s*=\s*$''',
+]
+
+[[allowlists]]
+description = "Generated artefacts and vendored tool state are not reviewed for secrets here."
+paths = [
+  '''.*/outputs/.*''',
+  '''.*/__pycache__/.*''',
+  '''.*\.terraform/.*''',
+  '''.*\.lock\.hcl$''',
+]

@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: Apache-2.0
+# Runtime dependencies for the Ansible MCP server.
+fastmcp~=3.4.7
+PyYAML~=6.0.3
+python-dotenv~=1.2.2
+ansible-core~=2.21.3

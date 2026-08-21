@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Secrets / local config
+.env
+*.env
+!.env.example
+!ansible-requirements.yml
+*.pem
+*.key
+*.p12
+credentials.json
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.tfplan
+mcp.tfplan*
+crash.log
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+vault_pass.txt
+ansible/vars/vault.yml
+ansible/collections/
+
+# Generated output
+outputs/backups/*
+outputs/logs/*
+outputs/reports/*
+!outputs/**/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

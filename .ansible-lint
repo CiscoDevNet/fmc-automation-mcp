@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+# ansible-lint configuration
+profile: production
+
+exclude_paths:
+  - .venv/
+  - outputs/
+  - collections/
+  - mcp_servers/
+
+# The cisco.fmcansible collection is installed in CI from ansible/requirements.yml so
+# module-name resolution can be verified. syntax-check is unskippable in ansible-lint.
+warn_list:
+  - experimental
