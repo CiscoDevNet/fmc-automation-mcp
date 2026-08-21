@@ -1,5 +1,5 @@
 {
-  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form. SPDX-License-Identifier: Apache-2.0",
+  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form.",
   "name": "Cisco Secure Firewall REST API MCP Server",
   "shortDescription": "MCP server exposing Cisco Secure Firewall (FMC) REST tooling to AI agents, with a preview-confirm-apply gate on every configuration change.",
   "description": "Gives an AI agent the FMC REST API behind a safety harness. Read-only tools cover inventory, object search with IP-containment matching, object-usage tracing, access-rule listing, and deployment status. Configuration changes are split into a preview tool that returns a plan plus an HMAC confirmation token bound to that plan, and an apply tool that refuses any token which does not authorise exactly the plan it was given. Writes are disabled entirely unless the operator sets FMC_ALLOW_WRITES=true.",

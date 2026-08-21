@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """Safe execution of ``ansible-playbook``.
 
 Every invocation is a fixed argv list with ``shell=False``. Nothing supplied by the

@@ -1,10 +1,6 @@
-# SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
 #
-# Do not hardcode credentials here. Supply them with environment variables:
-#   export TF_VAR_fmc_url=https://fmc.example.local
-#   export TF_VAR_fmc_username=apiuser
-#   read -rs TF_VAR_fmc_password && export TF_VAR_fmc_password
+# SPDX-License-Identifier: Apache-2.0
 provider "fmc" {
   fmc_username = var.fmc_username
   fmc_password = var.fmc_password

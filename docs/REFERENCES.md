@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # References
 
 - Cisco Secure Firewall Management Center REST API Quick Start Guide 7.6/7.7: token-based authentication, API Explorer, request structure, objects and policy services.

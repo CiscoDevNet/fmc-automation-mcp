@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # MCP Servers for Cisco Secure Firewall Automation
 
 Three [Model Context Protocol](https://modelcontextprotocol.io) servers that let an AI

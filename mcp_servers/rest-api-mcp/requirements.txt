@@ -1,6 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Runtime dependencies for the Secure Firewall REST API MCP server.
-# Compatible-release pins allow security patches, block breaking majors.
 fastmcp~=3.4.7
 httpx~=0.28.1
 python-dotenv~=1.2.2

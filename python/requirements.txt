@@ -1,7 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Runtime dependencies for the python/ scripts.
-# Compatible-release pins (~=) allow patch and minor security updates while blocking
-# breaking major upgrades. Dependabot proposes bumps weekly; CI runs pip-audit.
 requests~=2.34.2
 python-dotenv~=1.2.2
 pandas~=3.0.5

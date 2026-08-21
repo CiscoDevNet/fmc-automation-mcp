@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # MCP Server Ideas for Cisco Secure Firewall
 
 Working notes on why these three servers were built, and a backlog of further concepts.

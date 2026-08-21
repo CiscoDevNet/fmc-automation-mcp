@@ -1,5 +1,5 @@
 {
-  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form. SPDX-License-Identifier: Apache-2.0",
+  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form.",
   "name": "Ansible MCP Server for Cisco Secure Firewall",
   "shortDescription": "MCP server that lets an AI agent run reviewed cisco.fmcansible playbooks against FMC, with an allowlist, dry run, and confirmation gate.",
   "description": "The agent never writes automation. It selects from an allowlist of playbooks a human already reviewed and merged, and supplies variables drawn from a fixed permitted set. Every invocation is a fixed argv with shell=False; the playbook path is resolved and re-verified inside ansible/playbooks; extra variables are written to a temporary JSON file rather than interpolated into a command line; credential and connection variables are refused outright and come only from the operator's environment. Real execution is disabled until ANSIBLE_MCP_ALLOW_RUN=true and additionally requires a confirmation token bound to the dry-run plan.",

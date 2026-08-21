@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Terraform MCP Server for Cisco Secure Firewall, lets an AI agent explain Terraform plans and detect configuration drift on FMC without being able to apply
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](../../LICENSE)

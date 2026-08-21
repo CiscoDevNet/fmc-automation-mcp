@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Runtime dependencies for the Ansible MCP server.
 fastmcp~=3.4.7
 PyYAML~=6.0.3
 python-dotenv~=1.2.2

@@ -1,5 +1,5 @@
 {
-  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form. SPDX-License-Identifier: Apache-2.0",
+  "$comment": "Metadata for the Cisco DevNet Code Exchange submission form.",
   "name": "Terraform MCP Server for Cisco Secure Firewall",
   "shortDescription": "MCP server exposing Terraform validate, plan, explain, and drift detection for Cisco Secure Firewall, with apply disabled by default.",
   "description": "Gives an AI agent the Terraform workflow for Secure Firewall as read-only tools: version reporting, init with -backend=false, structured validate diagnostics, plan-to-file with a compact sanitised change summary, resource-by-resource plan explanation, refresh-only drift detection, and a sanitised state summary. Values Terraform marks sensitive are replaced with a placeholder before they leave the server, so credentials never reach the model context. Workspaces are addressed by allowlisted name, never by path. terraform apply is disabled until TF_MCP_ALLOW_APPLY=true and additionally requires a confirmation token bound to the reviewed change summary; it applies the saved plan file, closing the plan-then-apply-something-else gap.",

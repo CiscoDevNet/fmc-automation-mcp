@@ -1,5 +1,5 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Runtime dependencies for the Terraform MCP server.
-# The Terraform CLI itself must be installed separately (>= 1.6).
 fastmcp~=3.4.7
 python-dotenv~=1.2.2

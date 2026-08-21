@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Ansible MCP Server for Cisco Secure Firewall, lets an AI agent run reviewed cisco.fmcansible playbooks against FMC behind an allowlist and dry-run gate
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](../../LICENSE)

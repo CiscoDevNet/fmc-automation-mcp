@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """Safe execution of the ``terraform`` CLI, and parsing of its JSON plan output.
 
 Every invocation is a fixed argv with ``shell=False``, run with ``-chdir`` against an

@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """MCP server exposing Cisco Secure Firewall (FMC) REST tooling to AI agents.
 
 Read tools are always available. Every mutating tool is split into a ``preview_*`` and

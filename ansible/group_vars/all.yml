@@ -1,22 +1,7 @@
 ---
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
-#
-# NO SECRETS IN THIS FILE. It is committed to a public repository.
-#
-# Credentials are resolved from the environment at run time. Choose one:
-#
-#   1. Environment variables (reuses the same values as python/.env):
-#        export FMC_HOST=https://fmc.example.local
-#        export FMC_USERNAME=apiuser
-#        read -rs FMC_PASSWORD && export FMC_PASSWORD
-#
-#   2. ansible-vault (recommended for anything shared):
-#        ansible-vault create ansible/vars/vault.yml
-#        # add: fmc_password: "..."   then run with:
-#        ansible-playbook -i ansible/inventory.yml <playbook> \
-#          -e @ansible/vars/vault.yml --ask-vault-pass
-#      Variables passed with -e override the defaults below.
 
 fmc_hostname: "{{ lookup('env', 'FMC_HOST') | default('https://fmc.example.local', true) }}"
 fmc_username: "{{ lookup('env', 'FMC_USERNAME') | default('apiuser', true) }}"

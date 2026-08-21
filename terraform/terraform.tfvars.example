@@ -1,5 +1,4 @@
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 #
 # Copy to terraform.tfvars ONLY if you cannot use environment variables.
 # terraform.tfvars and *.auto.tfvars are gitignored - never commit real values.

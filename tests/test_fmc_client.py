@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """Tests for the FMC client's transport safety and pagination.
 
 The HTTP layer is stubbed with `responses`, so nothing here contacts a real FMC.

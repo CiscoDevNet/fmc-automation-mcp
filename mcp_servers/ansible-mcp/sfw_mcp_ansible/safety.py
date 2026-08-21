@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """Guardrails: write gate, plan-bound confirmation tokens, and redaction.
 
 Same contract as the other servers in this repository. Mutations are split into a dry

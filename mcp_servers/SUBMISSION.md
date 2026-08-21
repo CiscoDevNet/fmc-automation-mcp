@@ -1,3 +1,9 @@
+<!--
+Copyright 2026 Cisco Systems, Inc. and its affiliates
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # Submitting to Cisco DevNet Code Exchange
 
 How to take each server in this folder from "works on my laptop" to a published Code
@@ -32,7 +38,7 @@ The two options are not equivalent:
 **If you are a Cisco employee publishing under a personal account**, check your
 employer's open-source policy before publishing, and confirm the copyright holder in
 [LICENSE](../LICENSE) is what that policy requires. It currently reads
-`Copyright (c) 2026 Ranil Fernando`.
+`Copyright 2026 Cisco Systems, Inc. and its affiliates`.
 
 ## 2. The README *is* the article
 

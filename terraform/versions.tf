@@ -1,8 +1,6 @@
-# SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
 #
-# The CiscoDevNet/fmc provider is licensed MPL-2.0 and is downloaded from the public
-# Terraform Registry by `terraform init`. See the NOTICE file.
+# SPDX-License-Identifier: Apache-2.0
 terraform {
   required_version = ">= 1.6.0"
 

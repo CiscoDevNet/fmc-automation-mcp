@@ -1,5 +1,6 @@
+# Copyright 2026 Cisco Systems, Inc. and its affiliates
+#
 # SPDX-License-Identifier: Apache-2.0
-# Copyright (c) 2026 Ranil Fernando
 """Guardrails shared by every mutating tool.
 
 The central idea: a model must never be able to change a firewall in a single call.
