@@ -4,7 +4,7 @@ Copyright 2026 Cisco Systems, Inc. and its affiliates
 SPDX-License-Identifier: Apache-2.0
 -->
 
-# Secure Firewall Automation Starter Pack, automates objects, rules, NAT, and compliance reporting on FMC-managed FTD using Python, Ansible, Terraform, and MCP servers for AI agents
+# Cisco Secure Firewall Management Center Automation MCP server
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-blue.svg)](CODE_OF_CONDUCT.md)
