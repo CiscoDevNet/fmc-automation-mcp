@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 # Security Policies and Procedures
 
 This document outlines security procedures and general policies for the
-`<project name>` project.
+`fmc-automation-mcp` project.
 
 - [Reporting a Bug](#reporting-a-bug)
 - [Disclosure Policy](#disclosure-policy)
@@ -15,9 +15,9 @@ This document outlines security procedures and general policies for the
 
 ## Reporting a Bug
 
-The `<project name>` team and community take all security bugs in
-`<project name>` seriously. Thank you for improving the security of
-`<project name>`. We appreciate your efforts and responsible disclosure and
+The `fmc-automation-mcp` team and community take all security bugs in
+`fmc-automation-mcp` seriously. Thank you for improving the security of
+`fmc-automation-mcp`. We appreciate your efforts and responsible disclosure and
 will make every effort to acknowledge your contributions.
 
 Report security bugs by emailing `oss-security@cisco.com`.
