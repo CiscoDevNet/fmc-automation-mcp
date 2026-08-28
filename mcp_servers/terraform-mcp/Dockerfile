@@ -1,7 +1,7 @@
 # Copyright 2026 Cisco Systems, Inc. and its affiliates
 #
 # SPDX-License-Identifier: Apache-2.0
-FROM hashicorp/terraform:1.15.8 AS terraform
+FROM hashicorp/terraform:1.15.9 AS terraform
 
 FROM python:3.14-slim AS base
 
