@@ -1,6 +1,6 @@
 # Copyright 2026 Cisco Systems, Inc. and its affiliates
 #
 # SPDX-License-Identifier: Apache-2.0
-fastmcp~=3.4.7
+fastmcp~=4.0.0
 httpx~=0.28.1
 python-dotenv~=1.2.2
