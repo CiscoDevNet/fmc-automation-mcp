@@ -1,7 +1,7 @@
 # Copyright 2026 Cisco Systems, Inc. and its affiliates
 #
 # SPDX-License-Identifier: Apache-2.0
-FROM python:3.14-slim AS base
+FROM python:3.15-slim AS base
 
 RUN groupadd --gid 10001 mcp \
     && useradd --uid 10001 --gid mcp --create-home --shell /usr/sbin/nologin mcp
