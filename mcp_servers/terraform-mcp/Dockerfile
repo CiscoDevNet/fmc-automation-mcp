@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 FROM hashicorp/terraform:1.15.8 AS terraform
 
-FROM python:3.14-slim AS base
+FROM python:3.15-slim AS base
 
 # Terraform is licensed BUSL-1.1 by HashiCorp. The binary is copied from the official
 # image at build time and is not redistributed by this project. See the NOTICE file.
